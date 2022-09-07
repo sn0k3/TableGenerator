@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Table Generator v0.1</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+
+
+        <div class="info">
+            <h1>Table generator tool v0.1</h1>
+            <p>A tool which helps generating HTML tables and making it automatic using JS.</p>
+         </div>
+
+         <br /> 
+
+
+         <h2>Insert row</h2>
+        <form method="post" action="index.html">
+            <input type="text" name="addElement" class="fld">
+            <input type="text" name="addElement" class="fld"> 
+            <input type="text" name="addElement" class="fld"> <br />
+<!--            <input type="button" value="Add" onclick="addLI()"> <br /> -->
+        </form>
+        <button onclick="addElementsInTable()">Add elements</button> <br />
+
+
+        <div class="tablePreview">
+            <h2>Table preview</h2>
+
+            <table border="1" width="600" class="prevTable">
+                <tr>
+                    <td class="tableHeadings">Title</td>
+                    <td class="tableHeadings">Title #2</td>
+                    <td class="tableHeadings">Title #3</td>
+                </tr>
+
+                <tr>
+                    <td>Element</td>
+                    <td>Element #2</td>
+                    <td>Element #3</td>                
+                </tr>
+            </table>
+        </div>
+
+
+        
+        <script>
+            function addElementsInTable() {
+                
+            var table = document.getElementsByClassName("prevTable")[0];
+
+            var inputField1Text = document.getElementsByClassName("fld")[0].value;
+            var inputField2Text = document.getElementsByClassName("fld")[1].value;
+            var inputField3Text = document.getElementsByClassName("fld")[2].value;
+
+            if(inputField1Text.length > 0 || inputField2Text.length > 0 || inputField3Text.length > 0) {
+                // Creates an empty <tr></tr> element tag and adds it to the last position of the table
+                var row = table.insertRow(-1);
+                
+                // Insert cells to the 0, 1 and 2 element to the cell
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                var cell3 = row.insertCell(2);
+
+                // Set text to the cells
+                cell1.innerHTML = inputField1Text;
+                cell2.innerHTML = inputField2Text;
+                cell3.innerHTML = inputField3Text;
+
+                var tableSourceStr = 
+                "<table>\n" + 
+                    "<tr>\n" +
+                        "<td>Title</td> \n" + 
+                        "<td>Title #2</td>\n" +
+                        "<td>Title #3</td>\n" +
+                    "</tr>\n" +
+                    "<tr>\n" + 
+                        "<td>Element</td>\n" + 
+                        "<td>Element #2</td>\n" + 
+                        "<td>Element #3</td> \n" +                
+                    "</tr>\n";
+                
+                tableSourceStr += "<tr>\n" +
+                "<td>" + inputField1Text + "</td>\n" +
+                "<td>" + inputField2Text + "</td>\n" +
+                "<td>" + inputField3Text + "</td>\n" +
+                "</tr>";
+
+                tableSourceStr += "\n</table>\n";
+
+                document.getElementsByTagName("textarea")[0].innerHTML = tableSourceStr;
+            } else {
+                alert("Error, you should write atleast 1 symbol in one of the fields");
+            }    
+        }
+        </script>
+        
+
+        <div class="tablePreview">
+            <h2>Table source</h2>
+            <textarea rows="18" cols="109">
+                <table border="1" width="600" class="sourceTable">
+                    <tr>
+                        <td class="tableHeadings">Title</td>
+                        <td class="tableHeadings">Title #2</td>
+                        <td class="tableHeadings">Title #3</td>
+                    </tr>
+
+                    <tr>
+                        <td>Element</td>
+                        <td>Element #2</td>
+                        <td>Element #3</td>                
+                    </tr>
+                </table>
+            </textarea>
+        </div>
+
+    </body>
+</html>
